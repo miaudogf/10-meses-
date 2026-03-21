@@ -29,7 +29,6 @@
             overflow: hidden;
         }
 
-        /* Fundo com estrelas */
         .stars {
             position: fixed;
             inset: 0;
@@ -52,7 +51,6 @@
             50% { opacity: var(--op); transform: scale(1.2); }
         }
 
-        /* TELA PRINCIPAL */
         .screen {
             position: fixed;
             inset: 0;
@@ -70,7 +68,6 @@
             pointer-events: all;
         }
 
-        /* CARD */
         .card {
             background: var(--surface);
             border: 1px solid var(--border);
@@ -95,7 +92,6 @@
         .card::before { top: 12px; left: 12px; border-width: 1px 0 0 1px; }
         .card::after  { bottom: 12px; right: 12px; border-width: 0 1px 1px 0; }
 
-        /* ETAPA */
         .stage-label {
             font-size: 0.6rem;
             letter-spacing: 6px;
@@ -116,7 +112,6 @@
             background: var(--border);
         }
 
-        /* TITULO */
         .card-title {
             font-family: 'Cormorant Garamond', serif;
             font-size: 1.15rem;
@@ -127,7 +122,6 @@
             margin-bottom: 36px;
         }
 
-        /* PERGUNTA */
         .question {
             font-size: 0.72rem;
             letter-spacing: 2px;
@@ -137,7 +131,6 @@
             line-height: 1.8;
         }
 
-        /* INPUT */
         .input-wrap {
             position: relative;
             margin-bottom: 28px;
@@ -161,7 +154,6 @@
         input[type="text"]:focus { border-color: var(--gold); }
         input[type="text"]::placeholder { color: rgba(240,234,214,0.2); letter-spacing: 2px; }
 
-        /* BOTÃO */
         .btn {
             background: transparent;
             color: var(--gold);
@@ -174,6 +166,8 @@
             cursor: pointer;
             transition: all 0.3s ease;
             border-radius: 2px;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn:hover {
@@ -181,7 +175,6 @@
             color: var(--bg);
         }
 
-        /* ERRO */
         .error-msg {
             margin-top: 18px;
             font-size: 0.65rem;
@@ -194,7 +187,6 @@
 
         .error-msg.show { opacity: 1; }
 
-        /* SHAKE */
         @keyframes shake {
             0%,100% { transform: translateX(0); }
             20% { transform: translateX(-8px); }
@@ -204,7 +196,6 @@
         }
         .shake { animation: shake 0.4s ease; }
 
-        /* PROGRESS DOTS */
         .dots {
             display: flex;
             gap: 8px;
@@ -223,9 +214,12 @@
 
         .dot.filled { background: var(--gold); }
 
-        /* TELA FINAL */
-        #final-screen {
+        #screen-4 {
             flex-direction: column;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 60px 0 80px;
         }
 
         .final-card {
@@ -241,7 +235,14 @@
             animation: fadeUp 1.2s ease forwards;
         }
 
-        .final-card::before { content: ''; position: absolute; inset: 0; border-radius: 4px; background: radial-gradient(ellipse at top, rgba(201,168,76,0.05), transparent 60%); pointer-events: none; }
+        .final-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 4px;
+            background: radial-gradient(ellipse at top, rgba(201,168,76,0.05), transparent 60%);
+            pointer-events: none;
+        }
 
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -288,7 +289,48 @@
             letter-spacing: 1px;
         }
 
-        /* UNLOCK FLASH */
+        /* BOTÃO SEGREDO */
+        .secret-link-wrap {
+            margin-top: 40px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(201,168,76,0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .secret-hint {
+            font-size: 0.57rem;
+            letter-spacing: 5px;
+            color: rgba(240,234,214,0.25);
+            text-transform: uppercase;
+        }
+
+        .btn-secret {
+            background: transparent;
+            color: rgba(201,168,76,0.4);
+            border: 1px solid rgba(201,168,76,0.15);
+            padding: 10px 34px;
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: 0.57rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.6s ease;
+            border-radius: 2px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secret:hover {
+            color: var(--gold);
+            border-color: rgba(201,168,76,0.4);
+            box-shadow: 0 0 24px rgba(201,168,76,0.07);
+            letter-spacing: 6px;
+        }
+
+        /* FLASH / HEARTS */
         .unlock-flash {
             position: fixed;
             inset: 0;
@@ -299,7 +341,6 @@
             transition: opacity 0.3s;
         }
 
-        /* CORAÇÕES FLUTUANTES */
         .heart-burst {
             position: fixed;
             inset: 0;
@@ -323,13 +364,8 @@
 </head>
 <body>
 
-<!-- Estrelas -->
 <div class="stars" id="stars"></div>
-
-<!-- Flash de desbloqueio -->
 <div class="unlock-flash" id="flash"></div>
-
-<!-- Corações -->
 <div class="heart-burst" id="hearts"></div>
 
 <!-- ETAPA 1 -->
@@ -337,9 +373,9 @@
     <div class="card">
         <div class="stage-label">Fase 1 de 3</div>
         <div class="dots">
-            <div class="dot filled" id="d1"></div>
-            <div class="dot" id="d2"></div>
-            <div class="dot" id="d3"></div>
+            <div class="dot filled"></div>
+            <div class="dot"></div>
+            <div class="dot"></div>
         </div>
         <p class="card-title">Para acessar o que guardei para você,<br>primeiro preciso saber se é realmente você...</p>
         <p class="question">Qual é o filme favorito de mimi?</p>
@@ -358,7 +394,7 @@
         <div class="dots">
             <div class="dot filled"></div>
             <div class="dot filled"></div>
-            <div class="dot" ></div>
+            <div class="dot"></div>
         </div>
         <p class="card-title">Boa... mas ainda não chegou lá.<br>Mais uma.</p>
         <p class="question">Qual estilo de música mimi mais gosta?</p>
@@ -390,7 +426,7 @@
 </div>
 
 <!-- TELA FINAL -->
-<div class="screen" id="screen-4" style="overflow-y:auto; align-items:flex-start; padding: 40px 0;">
+<div class="screen" id="screen-4">
     <div class="final-card">
         <div class="big-number">10</div>
         <div class="big-sub">meses de nós</div>
@@ -404,11 +440,15 @@
         </article>
 
         <p class="signature">Com amor, mimi ❤️</p>
+
+        <div class="secret-link-wrap">
+            <span class="secret-hint">ainda há mais...</span>
+            <a href="rosa.html" class="btn-secret">continuar</a>
+        </div>
     </div>
 </div>
 
 <script>
-    // Estrelas
     const starsEl = document.getElementById('stars');
     for (let i = 0; i < 120; i++) {
         const s = document.createElement('div');
@@ -430,8 +470,6 @@
         2: "eletronica",
         3: "mar"
     };
-
-    let currentStage = 1;
 
     function normalize(str) {
         return str.toLowerCase()
@@ -455,12 +493,9 @@
                 });
             } else {
                 burstHearts();
-                flashTransition(() => {
-                    showScreen(4);
-                });
+                flashTransition(() => { showScreen(4); });
             }
         } else {
-            const card = input.closest('.card') || input.closest('.final-card');
             const cardEl = document.querySelector('#screen-' + stage + ' .card');
             cardEl.classList.remove('shake');
             void cardEl.offsetWidth;
@@ -484,10 +519,7 @@
     function flashTransition(cb) {
         const fl = document.getElementById('flash');
         fl.style.opacity = '0.15';
-        setTimeout(() => {
-            fl.style.opacity = '0';
-            cb();
-        }, 350);
+        setTimeout(() => { fl.style.opacity = '0'; cb(); }, 350);
     }
 
     function burstHearts() {
@@ -508,7 +540,6 @@
         }
     }
 
-    // Enter para avançar
     document.querySelectorAll('input').forEach((inp, i) => {
         inp.addEventListener('keypress', e => {
             if (e.key === 'Enter') check(i + 1);
